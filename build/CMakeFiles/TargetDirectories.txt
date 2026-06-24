@@ -1,0 +1,3 @@
+C:/Users/Admin/Desktop/MongoSAMP/build/CMakeFiles/MongoSAMP.dir
+C:/Users/Admin/Desktop/MongoSAMP/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/Admin/Desktop/MongoSAMP/build/CMakeFiles/ZERO_CHECK.dir

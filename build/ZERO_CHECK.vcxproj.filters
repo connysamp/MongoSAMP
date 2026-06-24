@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Admin\Desktop\MongoSAMP\build\CMakeFiles\70021732e6b634e31b8af9d51e6493e1\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{3CEB5D33-13D4-354C-9CF1-0140255A5E43}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
