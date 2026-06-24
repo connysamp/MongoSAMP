@@ -3,19 +3,13 @@
 #endif
 #define _mongo_included
 
-// --------------------------------------------------
-// Inizializzazione
-// --------------------------------------------------
+// Connection
 native bool:Mongo_Connect(const uri[], const database[]);
 
-// --------------------------------------------------
 // Index Management
-// --------------------------------------------------
 native Mongo_CreateIndex(const collection[], const field[], bool:unique = false);
 
-// --------------------------------------------------
-// BSON Query Builder System (Metodo Consigliato)
-// --------------------------------------------------
+// BSON Query Builder System (Recommended)
 native MongoBuilder_Create();
 native MongoBuilder_Destroy(builder_id);
 native MongoBuilder_AddInt(builder_id, const key[], val);
@@ -31,9 +25,7 @@ native Mongo_DeleteOneBuilder(const collection[], filter_builder_id);
 native Mongo_DeleteManyBuilder(const collection[], filter_builder_id, const callback[] = "", const format[] = "", {Float, _}:...);
 native Mongo_CountBuilder(const collection[], filter_builder_id, const callback[], const format[] = "", {Float, _}:...);
 
-// --------------------------------------------------
-// String JSON CRUD (Retrocompatibilità)
-// --------------------------------------------------
+// String JSON CRUD (Legacy/Hybrid Support)
 native Mongo_Insert(const collection[], const json_data[]);
 native Mongo_Find(const collection[], const json_filter[], const callback[], const format[] = "", {Float, _}:...);
 native Mongo_UpdateOne(const collection[], const json_filter[], const json_update[]);
@@ -42,23 +34,17 @@ native Mongo_DeleteOne(const collection[], const json_filter[]);
 native Mongo_DeleteMany(const collection[], const json_filter[], const callback[] = "", const format[] = "", {Float, _}:...);
 native Mongo_Count(const collection[], const json_filter[], const callback[], const format[] = "", {Float, _}:...);
 
-// --------------------------------------------------
-// Sistema di Cache (da usare DENTRO le callback)
-// --------------------------------------------------
+// Cache System (Must be used inside the callback)
 native MongoCache_GetRowCount();
 native MongoCache_GetDocument(row_idx, dest[], max_len = sizeof(dest));
 native MongoCache_GetExecutionTime();
 native MongoCache_GetAffectedCount();
 
-// --------------------------------------------------
-// BSON Native Getters (Estrazione Diretta Cache)
-// --------------------------------------------------
+// Native BSON Getters
 native MongoCache_GetInt(row_idx, const field[]);
 native Float:MongoCache_GetFloat(row_idx, const field[]);
 native MongoCache_GetString(row_idx, const field[], dest[], max_len = sizeof(dest));
 native bool:MongoCache_GetBool(row_idx, const field[]);
 
-// --------------------------------------------------
-// Error Handling Callback Globale
-// --------------------------------------------------
+// Global Error Handler
 forward OnMongoError(const message[]);

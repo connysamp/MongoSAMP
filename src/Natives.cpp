@@ -39,9 +39,7 @@ namespace Natives
 		return 1;
 	}
 
-	// ----------------------------------------------------
-	// BUILDER SYSTEM
-	// ----------------------------------------------------
+	// Builder System
 
 	cell AMX_NATIVE_CALL MongoBuilder_Create(AMX* amx, cell* params)
 	{
@@ -90,9 +88,7 @@ namespace Natives
 		return 1;
 	}
 
-	// ----------------------------------------------------
-	// BUILDER CRUD
-	// ----------------------------------------------------
+	// Builder CRUD
 
 	cell AMX_NATIVE_CALL Mongo_InsertBuilder(AMX* amx, cell* params)
 	{
@@ -223,9 +219,7 @@ namespace Natives
 	}
 
 
-	// ----------------------------------------------------
-	// STRING CRUD (Retrocompatibilità)
-	// ----------------------------------------------------
+	// String CRUD (Legacy/Hybrid Support)
 
 	cell AMX_NATIVE_CALL Mongo_Insert(AMX* amx, cell* params)
 	{
@@ -356,9 +350,7 @@ namespace Natives
 	}
 
 
-	// ----------------------------------------------------
-	// CACHE E GETTERS BSON
-	// ----------------------------------------------------
+	// Cache & BSON Getters
 
 	cell AMX_NATIVE_CALL MongoCache_GetRowCount(AMX* amx, cell* params)
 	{

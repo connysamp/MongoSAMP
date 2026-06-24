@@ -1,0 +1,25 @@
+# Compilazione e build
+build/
+bin/
+obj/
+*.ilk
+*.pdb
+*.lib
+*.exp
+*.dll
+*.so
+
+# Vcpkg (Librerie pesanti, NON VANNO su GitHub)
+vcpkg/
+vcpkg_installed/
+
+# Test Server
+test-server/
+
+# File di IDE e OS
+.vs/
+*.user
+*.suo
+.vscode/
+.DS_Store
+Thumbs.db

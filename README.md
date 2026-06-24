@@ -16,12 +16,49 @@ Built with the "End-Game" architecture, MongoSAMP features a **4-worker ThreadPo
 
 ---
 
-## Installation
+## Installation (Plug & Play)
 
-1. Copy `MongoSAMP.dll` (Windows) or `MongoSAMP.so` (Linux) to your `plugins/` directory.
-2. Add `MongoSAMP` to your `server.cfg` under `plugins`.
-3. Copy `mongo.inc` to your `pawno/include/` directory.
+1. Download the latest `MongoSAMP-v1.X-Windows.zip` from the **Releases** tab.
+2. Extract the contents into your SA:MP server root directory. It will automatically place `MongoSAMP.dll` in your `plugins/` folder, `mongo.inc` in `pawno/include/`, and all the required MongoDB C++ dependency `.dll` files in your main server folder.
+3. Add `MongoSAMP` to your `server.cfg` under `plugins`.
 4. Include it in your gamemode/filterscript: `#include <mongo>`
+
+---
+
+## Building from Source
+
+If you prefer to compile MongoSAMP yourself, you must use **vcpkg** to install the MongoDB C++ Driver dependencies. The plugin is built using CMake.
+
+### Requirements (Windows)
+- Visual Studio 2022 (with C++ Desktop Development tools)
+- CMake
+- Git
+
+### Step-by-Step Guide
+1. Clone this repository:
+```bash
+git clone https://github.com/connysamp/MongoSAMP.git
+cd MongoSAMP
+```
+
+2. Install vcpkg and the required dependencies:
+```bash
+git clone https://github.com/microsoft/vcpkg.git
+.\vcpkg\bootstrap-vcpkg.bat
+.\vcpkg\vcpkg install mongocxx[core] --triplet=x86-windows
+```
+
+3. Generate the build files using CMake and the vcpkg toolchain:
+```bash
+cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE=vcpkg/scripts/buildsystems/vcpkg.cmake
+```
+
+4. Compile the plugin in Release mode:
+```bash
+cmake --build build --config Release
+```
+
+Your compiled `MongoSAMP.dll` will be inside `build\Release\`. Note that you will also need to copy the dependency `.dll`s (from `vcpkg\installed\x86-windows\bin\`) to your server root directory.
 
 ---
 

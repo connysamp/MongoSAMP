@@ -65,7 +65,7 @@ namespace MongoSystem
 	{
 		AMX_Call cb;
 		cb.amx = amx ? amx : global_amx;
-		if (!cb.amx) return; // Non possiamo inviare l'errore senza un AMX
+		if (!cb.amx) return; // Cannot dispatch error without an AMX instance
 
 		cb.callback_name = "OnMongoError";
 		cb.is_error = true;
@@ -190,7 +190,7 @@ namespace MongoSystem
 			else
 			{
 				if(call.is_error) {
-					// L'utente non ha dichiarato OnMongoError, ignoriamo.
+					// OnMongoError not declared by the user, ignore silently.
 				} else {
 					logprintf("[MongoDB] Callback '%s' not found.", call.callback_name.c_str());
 				}
@@ -205,7 +205,7 @@ namespace MongoSystem
 			mongocxx::uri uri{ uri_str };
 			conn = std::make_unique<mongocxx::client>(uri);
 			
-			// Esegue un comando PING per verificare istantaneamente la connessione
+			// Execute PING command to verify connection immediately
 			bsoncxx::builder::basic::document ping_cmd{};
 			ping_cmd.append(bsoncxx::builder::basic::kvp("ping", 1));
 			(*conn)[db_name].run_command(ping_cmd.extract());
@@ -213,7 +213,7 @@ namespace MongoSystem
 			return true;
 		} catch(const std::exception& e) {
 			logprintf("[MongoDB] Connection Error: %s", e.what());
-			conn.reset(); // distruggiamo la connessione difettosa
+			conn.reset(); // Destroy faulty connection
 			return false;
 		}
 	}
@@ -236,9 +236,7 @@ namespace MongoSystem
 		queue_cv.notify_one();
 	}
 
-	// ----------------------------------------------------
-	// BUILDER SYSTEM
-	// ----------------------------------------------------
+	// Builder System
 
 	int BuilderCreate()
 	{
@@ -297,9 +295,7 @@ namespace MongoSystem
 		return bsoncxx::builder::basic::document{}.extract();
 	}
 
-	// ----------------------------------------------------
-	// BUILDER CRUD
-	// ----------------------------------------------------
+	// Builder CRUD
 
 	void InsertBuilder(const std::string& collection, int builder_id)
 	{
@@ -359,9 +355,7 @@ namespace MongoSystem
 			if (!conn) return;
 			auto coll = (*conn)[db_name][collection];
 			
-			// Se l'update non contiene $set o operatori, mongodb lancia errore. 
-			// L'utente deve gestire l'operatore nel builder, o noi possiamo wrapparlo in $set, 
-			// ma per coerenza con MQL nativo assumiamo che l'utente sappia cosa fa.
+			// Native MQL requires operators like $set. We assume the user handles this in the builder.
 			coll.update_one(filter_val.view(), update_val.view());
 		} });
 		queue_cv.notify_one();
@@ -472,9 +466,7 @@ namespace MongoSystem
 	}
 
 
-	// ----------------------------------------------------
-	// STRING CRUD (Retrocompatibilità)
-	// ----------------------------------------------------
+	// String CRUD (Legacy/Hybrid)
 
 	void Insert(const std::string& collection, const std::string& json_data)
 	{

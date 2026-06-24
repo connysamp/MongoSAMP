@@ -12,12 +12,12 @@ struct AMX_Call {
 	std::string format;
 	std::vector<int> int_params;
 
-	// Metadati Cache BSON
+	// BSON Cache Metadata
 	std::vector<bsoncxx::document::value> cache_bson_documents;
 	long long execution_time_ms;
 	int affected_count;
 
-	// Metadati per Error Callback
+	// Error Callback Metadata
 	bool is_error = false;
 	std::string error_message;
 };
@@ -64,7 +64,7 @@ namespace MongoSystem
 	// Global Active Cache Methods
 	int CacheGetRowCount();
 	long long CacheGetExecutionTime();
-	std::string CacheGetDocument(int row_idx); // Ritorna comunque il JSON string se richiesto
+	std::string CacheGetDocument(int row_idx); // Returns JSON string if needed
 	int CacheGetAffectedCount();
 
 	// BSON Native Getters
